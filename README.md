@@ -45,6 +45,23 @@
 - When: I calculate the score
 - Then: I get back 19
 
+### Calculate Winner
+
+- Given: I have a 18
+- And: the dealer has 19
+- When: I determine the winner
+- Then: The dealer win
+
+- Given: I have a 19
+- And: the dealer has a 18
+- When: I determine the winner
+- Then: I win
+
+- Given: I have a 18
+- And: the dealer has a 18
+- When: I determine the winner
+- Then: It's a draw
+
 
 
 
