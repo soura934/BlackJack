@@ -13,12 +13,13 @@ public class Cardvalue implements ICardValue {
        for (int i = 0; i < array1.length; i++) {
 
            if (array1[i] > value) {
-               System.out.println("the value of the card is:" +value);
+               System.out.println("given array value is: " + array1[i] + " & the converted value is:" + value);
            }
 
        }
 
-        return value;
+
+       return value;
     }
 }
 
