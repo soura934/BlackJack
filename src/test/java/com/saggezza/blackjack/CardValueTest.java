@@ -14,7 +14,7 @@ public class CardValueTest {
         //int v=10;
         //- When: I get the value
         ICardValue number=new Cardvalue();
-        int result=number.Compare();
+        int result=number.Compare("King of Spades");
         // - Then: I get 10
         assertEquals(10,result);
 
