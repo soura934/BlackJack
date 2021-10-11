@@ -9,39 +9,39 @@ public class NaturalsTest {
 
     @Test
     public void checkNaturalOne() {
-        //Given we have natural of 10 and 11
+        //Given we have angle of 10
 
         INatural obj1 = new Natural();
         //When: I check for natural
-        boolean resolvedEqualsOne = obj1.validate(10,11);
+        boolean resolvedEquals = obj1.validate(10, 11);
 
         // Then it should return true
-        assertTrue(resolvedEqualsOne);
+        assertTrue(resolvedEquals);
     }
 
     @Test
     public void checkNaturalTwo() {
-        //Given we have natural of 11 and 10
+        //Given we have angle of 11
 
         INatural obj2 = new Natural();
         //When: I check for natural
-        boolean resolvedEqualsTwo = obj2.validate(11,10);
+        boolean resolvedEqualsOne = obj2.validate(11, 10);
 
         // Then it should return true
-        assertTrue(resolvedEqualsTwo);
+        assertTrue(resolvedEqualsOne);
 
     }
 
     @Test
     public void checkNaturalThree() {
-        //Given we have angle of 9 and 10
+        //Given we have angle of 9
 
         INatural obj3 = new Natural();
         //When: I check for natural
-        boolean resolvedEqualsThree = obj3.validate(9,10);
+        boolean resolvedEqualsTwo = obj3.validate(9, 10);
 
         // Then it should return false
-        assertFalse(resolvedEqualsThree);
+        assertFalse(resolvedEqualsTwo);
 
     }}
 

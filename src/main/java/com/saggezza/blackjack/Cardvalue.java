@@ -18,7 +18,8 @@ public class Cardvalue implements ICardValue {
 
        }
 
-        return value;
+
+       return value;
     }
 }
 
