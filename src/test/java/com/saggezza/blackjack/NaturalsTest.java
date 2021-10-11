@@ -13,7 +13,7 @@ public class NaturalsTest {
 
         INatural obj1 = new Natural();
         //When: I check for natural
-        boolean resolvedEquals = obj1.validate(10);
+        boolean resolvedEquals = obj1.validate(10, 11);
 
         // Then it should return true
         assertTrue(resolvedEquals);
@@ -25,7 +25,7 @@ public class NaturalsTest {
 
         INatural obj2 = new Natural();
         //When: I check for natural
-        boolean resolvedEqualsOne = obj2.validate(11);
+        boolean resolvedEqualsOne = obj2.validate(11, 10);
 
         // Then it should return true
         assertTrue(resolvedEqualsOne);
@@ -38,7 +38,7 @@ public class NaturalsTest {
 
         INatural obj3 = new Natural();
         //When: I check for natural
-        boolean resolvedEqualsTwo = obj3.validate(9);
+        boolean resolvedEqualsTwo = obj3.validate(9, 10);
 
         // Then it should return false
         assertFalse(resolvedEqualsTwo);
