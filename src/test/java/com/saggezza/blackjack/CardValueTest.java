@@ -15,9 +15,7 @@ public class CardValueTest {
         //- When: I get the value
         ICardValue number=new Cardvalue();
         int result=number.Compare();
-        //Then I would pass the degree and velocity into the sine function and get back 7.03
-        //assertEquals(7.03,Y,0.01);
-       // - Then: I get 10
+        // - Then: I get 10
         assertEquals(10,result);
 
     }
