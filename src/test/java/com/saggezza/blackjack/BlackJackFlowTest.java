@@ -35,6 +35,12 @@ public class BlackJackFlowTest {
         dealerCards = new ArrayList<>();
         playerValues = new ArrayList<>();
         dealerValues = new ArrayList<>();
+        playerValues.add(3);
+        playerValues.add(8);
+        playerValues.add(9);
+        dealerValues.add(10);
+        dealerValues.add(4);
+        dealerValues.add(5);
     }
 
     @Test
@@ -63,7 +69,7 @@ public class BlackJackFlowTest {
 //      When: I start the game
         IBlackJackFlow blackJackFlow = new BlackJackFlow(generateDeck, drawCard, displayFlow,
                 cardValues, natural, playerFlow, dealerFlow);
-        blackJackFlow.playGame();
+        blackJackFlow.playGame(playerCards, dealerCards);
 
 //      Then: I call generate deck once
         verify(generateDeck, times(1)).Generate();
@@ -95,7 +101,7 @@ public class BlackJackFlowTest {
 //      When: I start the game
         IBlackJackFlow blackJackFlow = new BlackJackFlow(generateDeck, drawCard, displayFlow,
                 cardValues, natural, playerFlow, dealerFlow);
-        blackJackFlow.playGame();
+        blackJackFlow.playGame(playerCards, dealerCards);
 //      Then: I call generate draw card 4 times
         verify(drawCard, times(4)).draw(deck);
     }
@@ -129,7 +135,7 @@ public class BlackJackFlowTest {
 //      When: I start the game
         IBlackJackFlow blackJackFlow = new BlackJackFlow(generateDeck, drawCard, displayFlow,
                 cardValues, natural, playerFlow, dealerFlow);
-        blackJackFlow.playGame();
+        blackJackFlow.playGame(playerCards, dealerCards);
 
 //      Then: I call display card 4 times
         verify(displayFlow, times(2)).displayCards(argCaptor.capture(),
@@ -163,7 +169,7 @@ public class BlackJackFlowTest {
 //      When: I start the game
         IBlackJackFlow blackJackFlow = new BlackJackFlow(generateDeck, drawCard, displayFlow,
                 cardValues, natural, playerFlow, dealerFlow);
-        blackJackFlow.playGame();
+        blackJackFlow.playGame(playerCards, dealerCards);
 
 //      Then: I call carvalues card 2 times
         verify(cardValues, times(2)).getCardValues(argCaptor.capture());
@@ -196,7 +202,7 @@ public class BlackJackFlowTest {
 //      When: I start the game
         IBlackJackFlow blackJackFlow = new BlackJackFlow(generateDeck, drawCard, displayFlow,
                 cardValues, natural, playerFlow, dealerFlow);
-        blackJackFlow.playGame();
+        blackJackFlow.playGame(playerCards, dealerCards);
 
 //      Then: I call carvalues card 2 times
         verify(cardValues, times(2)).getCardValues(argCaptor.capture());
@@ -230,7 +236,7 @@ public class BlackJackFlowTest {
 //      When: I start the game
         IBlackJackFlow blackJackFlow = new BlackJackFlow(generateDeck, drawCard, displayFlow,
                 cardValues, natural, playerFlow, dealerFlow);
-        blackJackFlow.playGame();
+        blackJackFlow.playGame(playerCards, dealerCards);
 
 //      Then: I call carvalues card 2 times
         verify(playerFlow, times(1)).playerTurn(playerCards, deck);
@@ -265,7 +271,7 @@ public class BlackJackFlowTest {
 //      When: I start the game
         IBlackJackFlow blackJackFlow = new BlackJackFlow(generateDeck, drawCard, displayFlow,
                 cardValues, natural, playerFlow, dealerFlow);
-        blackJackFlow.playGame();
+        blackJackFlow.playGame(playerCards, dealerCards);
 
 //      Then: I call carvalues card 2 times
         verify(dealerFlow, times(1)).dealerDraw(dealerCards, deck);

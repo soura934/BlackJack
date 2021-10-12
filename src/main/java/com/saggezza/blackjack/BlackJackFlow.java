@@ -23,10 +23,8 @@ public class BlackJackFlow implements IBlackJackFlow{
         this.playerFlow = playerFlow;
         this.dealerFlow = dealerFlow;
     }
-    public void playGame() {
+    public void playGame(List<String> playerCards, List<String> dealerCards) {
         List<String> deck = generateDeck.Generate();
-        List<String> dealerCards = new ArrayList<>();
-        List<String> playerCards = new ArrayList<>();
         dealerCards.add(drawCard.draw(deck));
         playerCards.add(drawCard.draw(deck));
         dealerCards.add(drawCard.draw(deck));
