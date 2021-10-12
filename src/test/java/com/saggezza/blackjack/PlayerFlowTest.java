@@ -49,16 +49,12 @@ public class PlayerFlowTest {
         IDrawCard drawCard = mock(IDrawCard.class);
         when(drawCard.draw(deck)).thenReturn("Ace of Spades");
 
-        //When: Player stand.
+        //When: Player stands.
         IPlayerFlow playerFlow = new PlayerFlow(drawCard);
         playerFlow.playerTurn(cards,deck);
 
         //Then: Draw card is not called.
         verify(drawCard, times(0)).draw(deck);
-
-
-
-
 
     }
 
