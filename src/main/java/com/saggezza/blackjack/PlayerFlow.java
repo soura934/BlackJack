@@ -2,6 +2,7 @@ package com.saggezza.blackjack;
 
 import java.util.List;
 
+import java.util.Scanner;
 public class PlayerFlow implements IPlayerFlow {
 
     private IDrawCard drawCard;
@@ -11,7 +12,15 @@ public class PlayerFlow implements IPlayerFlow {
     }
 
     public void playerTurn(List<String> cards, List<String> deck) {
-        drawCard.draw(deck);
+
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter H to hold or D to Draw");
+        String userInput = scan.nextLine();
+
+        while(userInput.equals("D")) { //while they are drawing cards
+            drawCard.draw(deck); //they would only draw card if they enter D.
+
+        }
 
     }
 }
