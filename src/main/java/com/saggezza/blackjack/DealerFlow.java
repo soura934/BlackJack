@@ -1,17 +1,16 @@
 package com.saggezza.blackjack;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DealerFlow implements IDealerFlow{
 
     private IDrawCard drawCard;
-    private ICardValue cardValue;
+    private ICardValues cardValues;
     private ICalculateScore calculateScore;
 
-    public DealerFlow(IDrawCard drawCard, ICardValue cardValue, ICalculateScore calculateScore){
+    public DealerFlow(IDrawCard drawCard, ICardValues cardValues, ICalculateScore calculateScore){
         this.drawCard = drawCard;
-        this.cardValue = cardValue;
+        this.cardValues = cardValues;
         this.calculateScore = calculateScore;
     }
 
@@ -21,15 +20,14 @@ public class DealerFlow implements IDealerFlow{
         // pass it in cardValue.compare() then return 3;
         // pass it in a List then it will become: [3, 4]
         // pass it in the calculate score method
-        List<Integer> scores = new ArrayList<>();
-        for (int i = 0; i < dealerCards.size(); i++){
-            int score = cardValue.Compare(dealerCards.get(i));
-            scores.add(score);
-        }
+        List<Integer> scores = cardValues.getCardValues(dealerCards);
+
         int totalScore = calculateScore.calculate(scores);
-        if(dealerCards.size() < 5 && totalScore < 17){
+        while (dealerCards.size() < 5 && totalScore < 17){
             String card = drawCard.draw(deck);
             dealerCards.add(card);
+            scores = cardValues.getCardValues(dealerCards);
+            totalScore = calculateScore.calculate(scores);
         }
     }
 }
