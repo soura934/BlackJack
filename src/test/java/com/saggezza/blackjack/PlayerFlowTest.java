@@ -37,6 +37,7 @@ public class PlayerFlowTest {
 
         IDisplayFlow displayFlow = mock(IDisplayFlow.class);
 
+
         //When: Player decides to draw.
         IPlayerFlow playerFlow = new PlayerFlow(drawCard, displayFlow, cardValues, calculateScore);
         playerFlow.playerTurn(cards, deck);
@@ -72,6 +73,7 @@ public class PlayerFlowTest {
 
         IDisplayFlow displayFlow = mock(IDisplayFlow.class);
 
+
         //When: Player stands.
         IPlayerFlow playerFlow = new PlayerFlow(drawCard, displayFlow, cardValues, calculateScore);
         playerFlow.playerTurn(cards, deck);
@@ -106,6 +108,7 @@ public class PlayerFlowTest {
         when(calculateScore.calculate(values)).thenReturn(16);
 
         IDisplayFlow displayFlow = mock(IDisplayFlow.class);
+
 
         //When: Player draws.
         IPlayerFlow playerFlow = new PlayerFlow(drawCard, displayFlow, cardValues, calculateScore);

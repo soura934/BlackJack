@@ -53,9 +53,16 @@ public class BlackJackFlowTest {
         when(cardValues.getCardValues(playerCards)).thenReturn(playerValues);
         when(cardValues.getCardValues(dealerCards)).thenReturn(dealerValues);
 
+        INatural natural = mock(INatural.class);
+        when(natural.validate(3,8)).thenReturn(false);
+        when(natural.validate(10,4)).thenReturn(false);
+
+        IPlayerFlow playerFlow = mock(IPlayerFlow.class);
+        IDealerFlow dealerFlow = mock(IDealerFlow.class);
+
 //      When: I start the game
         IBlackJackFlow blackJackFlow = new BlackJackFlow(generateDeck, drawCard, displayFlow,
-                cardValues);
+                cardValues, natural, playerFlow, dealerFlow);
         blackJackFlow.playGame();
 
 //      Then: I call generate deck once
@@ -78,9 +85,16 @@ public class BlackJackFlowTest {
         when(cardValues.getCardValues(playerCards)).thenReturn(playerValues);
         when(cardValues.getCardValues(dealerCards)).thenReturn(dealerValues);
 
+        INatural natural = mock(INatural.class);
+        when(natural.validate(3,8)).thenReturn(false);
+        when(natural.validate(10,4)).thenReturn(false);
+
+        IPlayerFlow playerFlow = mock(IPlayerFlow.class);
+        IDealerFlow dealerFlow = mock(IDealerFlow.class);
+
 //      When: I start the game
         IBlackJackFlow blackJackFlow = new BlackJackFlow(generateDeck, drawCard, displayFlow,
-                cardValues);
+                cardValues, natural, playerFlow, dealerFlow);
         blackJackFlow.playGame();
 //      Then: I call generate draw card 4 times
         verify(drawCard, times(4)).draw(deck);
@@ -98,16 +112,23 @@ public class BlackJackFlowTest {
 
         IDisplayFlow displayFlow = mock(IDisplayFlow.class);
         ArgumentCaptor<String> argCaptor = ArgumentCaptor.forClass(String.class);
-        ArgumentCaptor<List<String>> argCaptor2 = ArgumentCaptor.forClass(List.class);
+        ArgumentCaptor<List> argCaptor2 = ArgumentCaptor.forClass(List.class);
         ArgumentCaptor<Boolean> argCaptor3 = ArgumentCaptor.forClass(Boolean.class);
 
         ICardValues cardValues = mock(ICardValues.class);
         when(cardValues.getCardValues(playerCards)).thenReturn(playerValues);
         when(cardValues.getCardValues(dealerCards)).thenReturn(dealerValues);
 
+        INatural natural = mock(INatural.class);
+        when(natural.validate(3,8)).thenReturn(false);
+        when(natural.validate(10,4)).thenReturn(false);
+
+        IPlayerFlow playerFlow = mock(IPlayerFlow.class);
+        IDealerFlow dealerFlow = mock(IDealerFlow.class);
+
 //      When: I start the game
         IBlackJackFlow blackJackFlow = new BlackJackFlow(generateDeck, drawCard, displayFlow,
-                cardValues);
+                cardValues, natural, playerFlow, dealerFlow);
         blackJackFlow.playGame();
 
 //      Then: I call display card 4 times
@@ -130,15 +151,123 @@ public class BlackJackFlowTest {
         ICardValues cardValues = mock(ICardValues.class);
         when(cardValues.getCardValues(playerCards)).thenReturn(playerValues);
         when(cardValues.getCardValues(dealerCards)).thenReturn(dealerValues);
-        ArgumentCaptor<List<String >> argCaptor = ArgumentCaptor.forClass(List.class);
+        ArgumentCaptor<List> argCaptor = ArgumentCaptor.forClass(List.class);
+
+        INatural natural = mock(INatural.class);
+        when(natural.validate(3,8)).thenReturn(false);
+        when(natural.validate(10,4)).thenReturn(false);
+
+        IPlayerFlow playerFlow = mock(IPlayerFlow.class);
+        IDealerFlow dealerFlow = mock(IDealerFlow.class);
 
 //      When: I start the game
         IBlackJackFlow blackJackFlow = new BlackJackFlow(generateDeck, drawCard, displayFlow,
-                cardValues);
+                cardValues, natural, playerFlow, dealerFlow);
         blackJackFlow.playGame();
 
 //      Then: I call carvalues card 2 times
         verify(cardValues, times(2)).getCardValues(argCaptor.capture());
     }
 
+    @Test
+    public void getNaturalsTwice() {
+//      Given: I am user
+        IGenerateDeck generateDeck = mock(IGenerateDeck.class);
+        when(generateDeck.Generate()).thenReturn(deck);
+
+        IDrawCard drawCard = mock(IDrawCard.class);
+        when(drawCard.draw(deck)).thenReturn(dealerCard1).thenReturn(playerCard1)
+                .thenReturn(dealerCard2).thenReturn(playerCard2);
+
+        IDisplayFlow displayFlow = mock(IDisplayFlow.class);
+
+        ICardValues cardValues = mock(ICardValues.class);
+        when(cardValues.getCardValues(playerCards)).thenReturn(playerValues);
+        when(cardValues.getCardValues(dealerCards)).thenReturn(dealerValues);
+
+        INatural natural = mock(INatural.class);
+        when(natural.validate(3,8)).thenReturn(false);
+        when(natural.validate(10,4)).thenReturn(false);
+        ArgumentCaptor<List> argCaptor = ArgumentCaptor.forClass(List.class);
+
+        IPlayerFlow playerFlow = mock(IPlayerFlow.class);
+        IDealerFlow dealerFlow = mock(IDealerFlow.class);
+
+//      When: I start the game
+        IBlackJackFlow blackJackFlow = new BlackJackFlow(generateDeck, drawCard, displayFlow,
+                cardValues, natural, playerFlow, dealerFlow);
+        blackJackFlow.playGame();
+
+//      Then: I call carvalues card 2 times
+        verify(cardValues, times(2)).getCardValues(argCaptor.capture());
+    }
+
+    @Test
+    public void getPlayerFlowTest() {
+//      Given: I am user
+        IGenerateDeck generateDeck = mock(IGenerateDeck.class);
+        when(generateDeck.Generate()).thenReturn(deck);
+
+        IDrawCard drawCard = mock(IDrawCard.class);
+        when(drawCard.draw(deck)).thenReturn(dealerCard1).thenReturn(playerCard1)
+                .thenReturn(dealerCard2).thenReturn(playerCard2);
+
+        IDisplayFlow displayFlow = mock(IDisplayFlow.class);
+
+        ICardValues cardValues = mock(ICardValues.class);
+        when(cardValues.getCardValues(playerCards)).thenReturn(playerValues);
+        when(cardValues.getCardValues(dealerCards)).thenReturn(dealerValues);
+
+        INatural natural = mock(INatural.class);
+        when(natural.validate(3,8)).thenReturn(false);
+        when(natural.validate(10,4)).thenReturn(false);
+
+        IPlayerFlow playerFlow = mock(IPlayerFlow.class);
+        IDealerFlow dealerFlow = mock(IDealerFlow.class);
+
+
+
+//      When: I start the game
+        IBlackJackFlow blackJackFlow = new BlackJackFlow(generateDeck, drawCard, displayFlow,
+                cardValues, natural, playerFlow, dealerFlow);
+        blackJackFlow.playGame();
+
+//      Then: I call carvalues card 2 times
+        verify(playerFlow, times(1)).playerTurn(playerCards, deck);
+    }
+
+    @Test
+    public void getDealerFlowTest() {
+//      Given: I am user
+        IGenerateDeck generateDeck = mock(IGenerateDeck.class);
+        when(generateDeck.Generate()).thenReturn(deck);
+
+        IDrawCard drawCard = mock(IDrawCard.class);
+        when(drawCard.draw(deck)).thenReturn(dealerCard1).thenReturn(playerCard1)
+                .thenReturn(dealerCard2).thenReturn(playerCard2);
+
+        IDisplayFlow displayFlow = mock(IDisplayFlow.class);
+
+        ICardValues cardValues = mock(ICardValues.class);
+        when(cardValues.getCardValues(playerCards)).thenReturn(playerValues);
+        when(cardValues.getCardValues(dealerCards)).thenReturn(dealerValues);
+
+        INatural natural = mock(INatural.class);
+        when(natural.validate(3,8)).thenReturn(false);
+        when(natural.validate(10,4)).thenReturn(false);
+
+        IPlayerFlow playerFlow = mock(IPlayerFlow.class);
+
+        IDealerFlow dealerFlow = mock(IDealerFlow.class);
+
+
+
+//      When: I start the game
+        IBlackJackFlow blackJackFlow = new BlackJackFlow(generateDeck, drawCard, displayFlow,
+                cardValues, natural, playerFlow, dealerFlow);
+        blackJackFlow.playGame();
+
+//      Then: I call carvalues card 2 times
+        verify(dealerFlow, times(1)).dealerDraw(dealerCards, deck);
+    }
 }
