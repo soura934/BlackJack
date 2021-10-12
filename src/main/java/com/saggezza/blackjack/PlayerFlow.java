@@ -20,6 +20,8 @@ public class PlayerFlow implements IPlayerFlow {
         while(userInput.equals("D")) { //while they are drawing cards
             drawCard.draw(deck); //they would only draw card if they enter D.
 
+            System.out.println("Enter H to hold or D to Draw");
+            userInput = scan.nextLine();
         }
 
     }

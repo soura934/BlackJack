@@ -15,7 +15,7 @@ public class PlayerFlowTest {
     @Test
     public void playerDrawTest() {
         String userInput = "D\nH";
-        new ByteArrayInputStream(userInput.getBytes());
+        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
         List<String> deck = new ArrayList<String>();
         List<String> cards = new ArrayList<>();
 
@@ -38,7 +38,7 @@ public class PlayerFlowTest {
     @Test
     public void playerHoldNoDrawTest() {
         String userInput = "H";
-        new ByteArrayInputStream(userInput.getBytes()); //Filling in with fake user input
+        System.setIn(new ByteArrayInputStream(userInput.getBytes())); //Filling in with fake user input
         List<String> deck = new ArrayList<String>();
         List<String> cards = new ArrayList<>();
 
