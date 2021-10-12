@@ -27,13 +27,13 @@ public class PlayerFlow implements IPlayerFlow {
             String newCard = drawCard.draw(deck); //they would only draw card if they enter D.
             cards.add(newCard);
             displayFlow.displayCards("player", cards, false);
-           List <Integer> cardVals  = cardValues.getCardValues(cards);
-           int score = calculateObject.calculate(cardVals);
-
+            List <Integer> cardVals  = cardValues.getCardValues(cards);
+            int score = calculateObject.calculate(cardVals);
+            if (score >= 21 || cards.size() == 5) {
+                break;
+            }
             System.out.println("Enter H to hold or D to Draw");
             userInput = scan.nextLine();
-
         }
-
     }
 }
