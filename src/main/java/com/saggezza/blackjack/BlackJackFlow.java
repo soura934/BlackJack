@@ -71,7 +71,7 @@ public class BlackJackFlow implements IBlackJackFlow{
         displayFlow.displayCards("Dealer", dealerCards, false );
         displayFlow.displayCards("Player", playerCards, false );
 
-         dealerValues = cardValues.getCardValues(dealerCards);
+        dealerValues = cardValues.getCardValues(dealerCards);
          int dealerScore = calculateScore.calculate(dealerValues);
          if(dealerScore > 21) {
              System.out.println("Dealer busted Player wins!");
