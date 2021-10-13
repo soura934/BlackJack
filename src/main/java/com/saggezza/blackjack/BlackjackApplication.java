@@ -4,7 +4,7 @@ package com.saggezza.blackjack;
 public class BlackjackApplication {
 
 	public static void main(String[] args) {
-//		SpringApplication.run(BlackjackApplication.class, args);
+		IGenerateDeck generateDeck = new GenerateDeck();
 	}
 
 }
