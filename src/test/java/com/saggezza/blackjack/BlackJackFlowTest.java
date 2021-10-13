@@ -194,7 +194,8 @@ public class BlackJackFlowTest {
         INatural natural = mock(INatural.class);
         when(natural.validate(3,8)).thenReturn(false);
         when(natural.validate(10,4)).thenReturn(false);
-        ArgumentCaptor<List> argCaptor = ArgumentCaptor.forClass(List.class);
+        ArgumentCaptor<Integer> argCaptor = ArgumentCaptor.forClass(Integer.class);
+        ArgumentCaptor<Integer> argCaptor2 = ArgumentCaptor.forClass(Integer.class);
 
         IPlayerFlow playerFlow = mock(IPlayerFlow.class);
         IDealerFlow dealerFlow = mock(IDealerFlow.class);
@@ -205,7 +206,7 @@ public class BlackJackFlowTest {
         blackJackFlow.playGame(playerCards, dealerCards);
 
 //      Then: I call carvalues card 2 times
-        verify(cardValues, times(2)).getCardValues(argCaptor.capture());
+        verify(natural, times(2)).validate(argCaptor.capture(),argCaptor2.capture());
     }
 
     @Test

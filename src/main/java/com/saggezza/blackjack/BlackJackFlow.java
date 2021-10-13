@@ -34,6 +34,7 @@ public class BlackJackFlow implements IBlackJackFlow{
         displayFlow.displayCards("Player", playerCards, false );
         List<Integer> playerValues = cardValues.getCardValues(playerCards);
         List<Integer> dealerValues = cardValues.getCardValues(dealerCards);
+
         boolean playerNatural = naturalValues.validate(playerValues.get(0), playerValues.get(1));
         boolean dealerNatural = naturalValues.validate(dealerValues.get(0), dealerValues.get(1));
 
@@ -53,5 +54,7 @@ public class BlackJackFlow implements IBlackJackFlow{
         dealerFlow.dealerDraw(dealerCards, deck);
         displayFlow.displayCards("Dealer", dealerCards, false );
         displayFlow.displayCards("Player", playerCards, false );
+         playerValues = cardValues.getCardValues(playerCards);
+         dealerValues = cardValues.getCardValues(dealerCards);
     }
 }
