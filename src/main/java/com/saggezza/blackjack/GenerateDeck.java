@@ -1,8 +1,11 @@
 package com.saggezza.blackjack;
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class GenerateDeck implements IGenerateDeck {
     public List<String> Generate() {
         String[] SUITS = {"Clubs", "Diamonds", "Hearts", "Spades"}; //initialising the suits of the deck in a String array named 'SUITS'

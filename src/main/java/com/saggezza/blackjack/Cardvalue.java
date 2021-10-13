@@ -4,9 +4,12 @@ package com.saggezza.blackjack;
 
 //import java.lang.constant.Constable;
 
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class Cardvalue implements ICardValue {
 
     private Map<String, Integer> cardMap;

@@ -1,5 +1,8 @@
 package com.saggezza.blackjack;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Natural implements INatural {
 
     public boolean validate(int card1, int card2) {

@@ -1,7 +1,11 @@
 package com.saggezza.blackjack;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
+@Component
 public class BlackJackFlow implements IBlackJackFlow{
 
     private IGenerateDeck generateDeck;
@@ -13,6 +17,7 @@ public class BlackJackFlow implements IBlackJackFlow{
     private IDealerFlow dealerFlow;
     private ICalculateScore calculateScore;
 
+    @Autowired
     public BlackJackFlow(IGenerateDeck generateDeck, IDrawCard drawCard, IDisplayFlow displayFlow,
                          ICardValues cardValues, INatural naturalValues, IPlayerFlow playerFlow,
                          IDealerFlow dealerFlow, ICalculateScore calculateScore) {
@@ -62,7 +67,7 @@ public class BlackJackFlow implements IBlackJackFlow{
             System.out.println("Player drew 5 cards so they win");
             return;
         }
-        dealerFlow.dealerDraw(dealerCards, deck);
+        dealerFlow.dealerDraw(deck, dealerCards);
         displayFlow.displayCards("Dealer", dealerCards, false );
         displayFlow.displayCards("Player", playerCards, false );
 

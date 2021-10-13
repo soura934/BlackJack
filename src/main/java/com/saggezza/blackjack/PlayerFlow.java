@@ -1,8 +1,13 @@
 package com.saggezza.blackjack;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
 import java.util.Scanner;
+
+@Component
 public class PlayerFlow implements IPlayerFlow {
 
     private IDrawCard drawCard;
@@ -10,6 +15,7 @@ public class PlayerFlow implements IPlayerFlow {
     private ICardValues cardValues;
     private ICalculateScore calculateObject;
 
+    @Autowired
     public PlayerFlow(IDrawCard drawCard, IDisplayFlow displayFlow, ICardValues cardValues, ICalculateScore calculateObject) {
         this.drawCard = drawCard;
         this.displayFlow = displayFlow;

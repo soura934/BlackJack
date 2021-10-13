@@ -1,7 +1,10 @@
 package com.saggezza.blackjack;
 
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
+@Component
 public class DisplayFlow implements IDisplayFlow {
 
     public void displayCards(String player, List<String> cards, boolean hidden) {

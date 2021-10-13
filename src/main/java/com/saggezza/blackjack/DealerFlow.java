@@ -1,13 +1,18 @@
 package com.saggezza.blackjack;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
+@Component
 public class DealerFlow implements IDealerFlow{
 
     private IDrawCard drawCard;
     private ICardValues cardValues;
     private ICalculateScore calculateScore;
 
+    @Autowired
     public DealerFlow(IDrawCard drawCard, ICardValues cardValues, ICalculateScore calculateScore){
         this.drawCard = drawCard;
         this.cardValues = cardValues;

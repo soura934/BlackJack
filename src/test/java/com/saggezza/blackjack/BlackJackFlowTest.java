@@ -298,7 +298,7 @@ public class BlackJackFlowTest {
         blackJackFlow.playGame(playerCards, dealerCards);
 
 //      Then: I call carvalues card 2 times
-        verify(dealerFlow, times(1)).dealerDraw(dealerCards, deck);
+        verify(dealerFlow, times(1)).dealerDraw(deck, dealerCards);
     }
 
     @Test

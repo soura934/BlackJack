@@ -1,7 +1,10 @@
 package com.saggezza.blackjack;
 
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
+@Component
 public class CalculateScore implements ICalculateScore {
 
     public int calculate(List<Integer> values) {
