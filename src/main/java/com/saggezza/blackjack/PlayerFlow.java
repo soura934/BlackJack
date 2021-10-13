@@ -35,7 +35,7 @@ public class PlayerFlow implements IPlayerFlow {
             displayFlow.displayCards("player", cards, false);
             List <Integer> cardVals  = cardValues.getCardValues(cards);
             int score = calculateObject.calculate(cardVals);
-            if (score >= 21 || cards.size() == 5) {
+            if (score > 21 || cards.size() == 5) {
                 break;
             }
             System.out.println("Enter H to hold or D to Draw");
