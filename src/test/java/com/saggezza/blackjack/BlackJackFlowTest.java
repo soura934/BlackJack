@@ -138,7 +138,7 @@ public class BlackJackFlowTest {
         blackJackFlow.playGame(playerCards, dealerCards);
 
 //      Then: I call display card 4 times
-        verify(displayFlow, times(2)).displayCards(argCaptor.capture(),
+        verify(displayFlow, times(4)).displayCards(argCaptor.capture(),
                 argCaptor2.capture(), argCaptor3.capture());
     }
 
@@ -172,7 +172,7 @@ public class BlackJackFlowTest {
         blackJackFlow.playGame(playerCards, dealerCards);
 
 //      Then: I call carvalues card 2 times
-        verify(cardValues, times(2)).getCardValues(argCaptor.capture());
+        verify(cardValues, times(4)).getCardValues(argCaptor.capture());
     }
 
     @Test

@@ -50,6 +50,8 @@ public class BlackJackFlow implements IBlackJackFlow{
         }
 
         playerFlow.playerTurn(playerCards, deck);
-        dealerFlow.dealerDraw(dealerCards,deck);
+        dealerFlow.dealerDraw(dealerCards, deck);
+        displayFlow.displayCards("Dealer", dealerCards, false );
+        displayFlow.displayCards("Player", playerCards, false );
     }
 }
