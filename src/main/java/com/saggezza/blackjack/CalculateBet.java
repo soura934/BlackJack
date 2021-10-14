@@ -1,7 +1,10 @@
 package com.saggezza.blackjack;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class CalculateBet implements ICalculateBet {
-    public double calculate(double money, int bet, String gameResult) {
+    public double calculate(double money, double bet, String gameResult) {
         money = money - bet;
         if (gameResult.equals("natural")) {
             money += (bet * 2.5);

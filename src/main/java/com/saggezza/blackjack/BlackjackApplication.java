@@ -15,8 +15,10 @@ public class BlackjackApplication {
 		List<String> playerCards = new ArrayList<>();
 		List<String> dealerCards = new ArrayList<>();
 
-		IBlackJackFlow blackJackFlow = ctx.getBean(BlackJackFlow.class);
-		blackJackFlow.playGame(playerCards, dealerCards);
+		//IBlackJackFlow blackJackFlow = ctx.getBean(BlackJackFlow.class);
+		//blackJackFlow.playGame(playerCards, dealerCards);
+		IMainFlow mainFlow=ctx.getBean(MainFlow.class);
+		mainFlow.playBets(playerCards,dealerCards);
 	}
 
 }

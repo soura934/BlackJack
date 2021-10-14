@@ -15,8 +15,8 @@ public class BetInputFlowTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
 
         // Given: The user has $100
-        int userAmount = 100;
-        int userBet = 90;
+        double userAmount = 100;
+        double userBet = 90;
 
         IBetValidation betValid = mock(IBetValidation.class);
         when(betValid.validateBet(userAmount, userBet)).thenReturn(true);
@@ -35,8 +35,8 @@ public class BetInputFlowTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
 
         // Given: The user has $100
-        int userAmount = 100;
-        int userBet = 120;
+        double userAmount = 100;
+        double userBet = 120;
 
         IBetValidation betValid = mock(IBetValidation.class);
         when(betValid.validateBet(userAmount, userBet)).thenReturn(false);
@@ -55,8 +55,8 @@ public class BetInputFlowTest {
     @Test
     public void validateBetCalledTwice2() {
         // Given: The user amount is 100
-        int userAmount = 100;
-        int userBet = 0;
+        double userAmount = 100;
+        double userBet = 0;
 
         String userBetInput = "0\n95";
         System.setIn(new ByteArrayInputStream(userBetInput.getBytes()));

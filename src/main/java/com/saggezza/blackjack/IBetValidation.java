@@ -1,5 +1,5 @@
 package com.saggezza.blackjack;
 
 public interface IBetValidation {
-    boolean validateBet(int userAmount, int userBet);
+    boolean validateBet(double userAmount, double userBet);
 }

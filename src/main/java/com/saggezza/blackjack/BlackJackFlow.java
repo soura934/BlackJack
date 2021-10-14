@@ -30,7 +30,7 @@ public class BlackJackFlow implements IBlackJackFlow{
         this.dealerFlow = dealerFlow;
         this.calculateScore = calculateScore;
     }
-    public void playGame(List<String> playerCards, List<String> dealerCards) {
+    public String playGame(List<String> playerCards, List<String> dealerCards) {
         List<String> deck = generateDeck.Generate();
         dealerCards.add(drawCard.draw(deck));
         playerCards.add(drawCard.draw(deck));
@@ -47,14 +47,14 @@ public class BlackJackFlow implements IBlackJackFlow{
 
         if(dealerNatural && playerNatural) {
             System.out.println("The game is a tie. Both players have naturals");
-            return;
+            return "tie";
 
         } else if(dealerNatural) {
             System.out.println("The dealer wins with a natural");
-            return;
+            return "loose";
         } else if(playerNatural) {
             System.out.println("The player wins with a natural");
-            return;
+            return "natural";
         }
 
         playerFlow.playerTurn(playerCards, deck);
@@ -62,10 +62,10 @@ public class BlackJackFlow implements IBlackJackFlow{
         int playerScore = calculateScore.calculate((playerValues));
         if (playerScore > 21) {
             System.out.println("Player busted Dealer wins");
-            return;
+            return "loose";
         } else if (playerCards.size() == 5){
             System.out.println("Player drew 5 cards so they win");
-            return;
+            return "win";
         }
         dealerFlow.dealerDraw(deck, dealerCards);
         displayFlow.displayCards("Dealer", dealerCards, false );
@@ -75,14 +75,23 @@ public class BlackJackFlow implements IBlackJackFlow{
          int dealerScore = calculateScore.calculate(dealerValues);
          if(dealerScore > 21) {
              System.out.println("Dealer busted Player wins!");
+            return "win";
+
          } else if (dealerCards.size() == 5) {
              System.out.println("Dealer drew 5 cards so they win");
+             return "loose";
+
          } else if (dealerScore > playerScore) {
              System.out.println("Dealer wins");
+             return"loose";
+
          } else if (playerScore > dealerScore) {
              System.out.println("Player wins");
+             return"win";
+
          } else {
              System.out.println("Tie");
+             return "tie";
          }
     }
 }

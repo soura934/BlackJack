@@ -1,5 +1,5 @@
 package com.saggezza.blackjack;
 
 public interface IBetInputFlow {
-    int getUserBet(int userAmount);
+    double getUserBet(double userAmount);
 }
