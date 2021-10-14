@@ -35,11 +35,11 @@ public class PlayerCountInputTest {
         when(playerCountValidation.validate(4)).thenReturn(true);
         ArgumentCaptor<Integer> argumentCaptor = ArgumentCaptor.forClass(Integer.class);
 
-//        When: I get the player count of 4
+//        When: I get the player count of 6 and 4
         IPlayerCountInput playerCountInput = new PlayerCountInput(playerCountValidation);
         playerCountInput.getPlayerCount();
 
-//        Then: Player Count Validate Once
+//        Then: Player Count Validate twice
         verify(playerCountValidation, times(2)).validate(argumentCaptor.capture());
     }
 }
