@@ -21,7 +21,7 @@ public class CalculateBet implements ICalculateBet {
 
             return money;
         } else {
-            System.out.println("You bet: " + bet + " and your new amount is : " + money);
+            System.out.println("You bet: " + bet + " and your new amount is : " +( money+bet));
         }
         return money + bet;
     }
