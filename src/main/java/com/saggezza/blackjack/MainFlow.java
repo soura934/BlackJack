@@ -21,15 +21,20 @@ public class MainFlow implements IMainFlow {
        double userAmount=100;
        boolean playAgain=true;
         Scanner scanner=new Scanner(System.in);
-        while(playAgain&&userAmount>0){
+        while(playAgain){
             double bet=betFlow.getUserBet(userAmount);
             String result= blackjackobj.playGame(playerCards,dealerCards);
             userAmount = calculateobj.calculate(userAmount,bet,result);
+            if(userAmount==0){
+                System.out.println("You have no more money");
+                break;
+            }
             System.out.println("Would you press P to play again");
          String input= scanner.nextLine();
          playAgain=input.equals("P");
          playerCards.clear();
          dealerCards.clear();
+
         }
 
 
