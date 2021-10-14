@@ -3,6 +3,7 @@ package com.saggezza.blackjack;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -30,8 +31,10 @@ public class BlackJackFlow implements IBlackJackFlow{
         this.dealerFlow = dealerFlow;
         this.calculateScore = calculateScore;
     }
-    public String playGame(List<String> playerCards, List<String> dealerCards) {
+    public String playGame() {
         List<String> deck = generateDeck.Generate();
+        List<String> playerCards = new ArrayList<>();
+        List<String> dealerCards = new ArrayList<>();
         dealerCards.add(drawCard.draw(deck));
         playerCards.add(drawCard.draw(deck));
         dealerCards.add(drawCard.draw(deck));

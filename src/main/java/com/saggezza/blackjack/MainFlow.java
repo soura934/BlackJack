@@ -17,13 +17,13 @@ public class MainFlow implements IMainFlow {
         this.calculateobj=calculateobj;
     }
 
-    public void playBets(List<String> playerCards,List<String>dealerCards) {
+    public void playBets() {
        double userAmount=100;
        boolean playAgain=true;
         Scanner scanner=new Scanner(System.in);
         while(playAgain){
             double bet=betFlow.getUserBet(userAmount);
-            String result= blackjackobj.playGame(playerCards,dealerCards);
+            String result= blackjackobj.playGame();
             userAmount = calculateobj.calculate(userAmount,bet,result);
             if(userAmount==0){
                 System.out.println("You have no more money");
@@ -32,9 +32,6 @@ public class MainFlow implements IMainFlow {
             System.out.println("Would you press P to play again");
          String input= scanner.nextLine();
          playAgain=input.equals("P");
-         playerCards.clear();
-         dealerCards.clear();
-
         }
 
 

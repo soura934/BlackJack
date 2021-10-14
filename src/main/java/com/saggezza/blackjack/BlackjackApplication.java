@@ -12,13 +12,10 @@ public class BlackjackApplication {
 	public static void main(String[] args) {
 		ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
 
-		List<String> playerCards = new ArrayList<>();
-		List<String> dealerCards = new ArrayList<>();
-
 		//IBlackJackFlow blackJackFlow = ctx.getBean(BlackJackFlow.class);
 		//blackJackFlow.playGame(playerCards, dealerCards);
 		IMainFlow mainFlow=ctx.getBean(MainFlow.class);
-		mainFlow.playBets(playerCards,dealerCards);
+		mainFlow.playBets();
 	}
 
 }

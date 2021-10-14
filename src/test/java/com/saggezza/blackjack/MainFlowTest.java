@@ -30,13 +30,13 @@ public class MainFlowTest {
         IBetInputFlow inputobj= mock (IBetInputFlow.class);
         when(inputobj.getUserBet(100.0)).thenReturn(50.0);
         IBlackJackFlow blackjackobj=mock(IBlackJackFlow.class);
-        when(blackjackobj.playGame(playerCards,dealerCards)).thenReturn("natural");
+        when(blackjackobj.playGame()).thenReturn("natural");
         ICalculateBet calculateobj=mock(ICalculateBet.class);
         when(calculateobj.calculate(100.0,50.0,"natural")).thenReturn(175.0);
 
         //when I start the game
       IMainFlow mainFlowobj=new MainFlow(inputobj,blackjackobj,calculateobj);
-      mainFlowobj.playBets(playerCards,dealerCards );
+      mainFlowobj.playBets();
       //Then i call betInputFlowOnce
 verify(inputobj,times(1)).getUserBet(100);
     }
@@ -49,17 +49,17 @@ verify(inputobj,times(1)).getUserBet(100);
         when(inputobj.getUserBet(100)).thenReturn(50.0);
 
         IBlackJackFlow blackjackobj=mock(IBlackJackFlow.class);
-        when(blackjackobj.playGame(playerCards,dealerCards)).thenReturn("natural");
+        when(blackjackobj.playGame()).thenReturn("natural");
 
         ICalculateBet calculateobj=mock(ICalculateBet.class);
         when(calculateobj.calculate(100,50,"natural")).thenReturn(175.0);
 
         //when I start the game
         IMainFlow mainFlowobj=new MainFlow(inputobj,blackjackobj,calculateobj);
-        mainFlowobj.playBets(playerCards,dealerCards );
+        mainFlowobj.playBets();
 
         //Then I call blackjack once
-        verify(blackjackobj,times(1)).playGame(playerCards,dealerCards);
+        verify(blackjackobj,times(1)).playGame();
     }
 
     @Test
@@ -70,14 +70,14 @@ verify(inputobj,times(1)).getUserBet(100);
         when(inputobj.getUserBet(100)).thenReturn(50.0);
 
         IBlackJackFlow blackjackobj=mock(IBlackJackFlow.class);
-        when(blackjackobj.playGame(playerCards,dealerCards)).thenReturn("natural");
+        when(blackjackobj.playGame()).thenReturn("natural");
 
         ICalculateBet calculateobj=mock(ICalculateBet.class);
         when(calculateobj.calculate(100,50,"natural")).thenReturn(175.0);
 
         //when I start the game
         IMainFlow mainFlowobj=new MainFlow(inputobj,blackjackobj,calculateobj);
-        mainFlowobj.playBets(playerCards,dealerCards );
+        mainFlowobj.playBets();
 
         //Then I call blackjack once
         verify(calculateobj,times(1)).calculate(100,50,"natural");
@@ -91,7 +91,7 @@ verify(inputobj,times(1)).getUserBet(100);
         when(inputobj.getUserBet(175.0)).thenReturn(100.0);
 
         IBlackJackFlow blackjackobj=mock(IBlackJackFlow.class);
-        when(blackjackobj.playGame(playerCards,dealerCards)).thenReturn("natural").thenReturn("loose");
+        when(blackjackobj.playGame()).thenReturn("natural").thenReturn("loose");
 
         ICalculateBet calculateobj=mock(ICalculateBet.class);
         when(calculateobj.calculate(100,50,"natural")).thenReturn(175.0);
@@ -102,7 +102,7 @@ verify(inputobj,times(1)).getUserBet(100);
 
         //when I start the game
         IMainFlow mainFlowobj=new MainFlow(inputobj,blackjackobj,calculateobj);
-        mainFlowobj.playBets(playerCards,dealerCards );
+        mainFlowobj.playBets();
 
         //Then I call blackjack once
         verify(calculateobj,times(2)).calculate(argumentCaptor.capture(),argumentCaptor.capture(),
