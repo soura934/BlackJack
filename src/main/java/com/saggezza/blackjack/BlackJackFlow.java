@@ -17,11 +17,12 @@ public class BlackJackFlow implements IBlackJackFlow{
     private IPlayerFlow playerFlow;
     private IDealerFlow dealerFlow;
     private ICalculateScore calculateScore;
+    private INaturalCheck naturalCheck;
 
     @Autowired
     public BlackJackFlow(IGenerateDeck generateDeck, IDrawCard drawCard, IDisplayFlow displayFlow,
                          ICardValues cardValues, INatural naturalValues, IPlayerFlow playerFlow,
-                         IDealerFlow dealerFlow, ICalculateScore calculateScore) {
+                         IDealerFlow dealerFlow, ICalculateScore calculateScore, INaturalCheck naturalCheck) {
         this.generateDeck = generateDeck;
         this.drawCard = drawCard;
         this.displayFlow = displayFlow;
@@ -30,11 +31,23 @@ public class BlackJackFlow implements IBlackJackFlow{
         this.playerFlow = playerFlow;
         this.dealerFlow = dealerFlow;
         this.calculateScore = calculateScore;
+        this.naturalCheck = naturalCheck;
     }
+
+    // public List<String> playGame(List<Boolean> players) {
     public String playGame() {
         List<String> deck = generateDeck.Generate();
+
+//        List<List<String>> playersCards = new ArrayList<>();
+//        for(int i = 0; i < players.size(); i++) {
+//            playersCards.add(new ArrayList<>());
+//        }
+
         List<String> playerCards = new ArrayList<>();
         List<String> dealerCards = new ArrayList<>();
+
+        // List<String> results = new ArrayList<>();
+
         dealerCards.add(drawCard.draw(deck));
         playerCards.add(drawCard.draw(deck));
         dealerCards.add(drawCard.draw(deck));
@@ -48,17 +61,8 @@ public class BlackJackFlow implements IBlackJackFlow{
         boolean playerNatural = naturalValues.validate(playerValues.get(0), playerValues.get(1));
         boolean dealerNatural = naturalValues.validate(dealerValues.get(0), dealerValues.get(1));
 
-        if(dealerNatural && playerNatural) {
-            System.out.println("The game is a tie. Both players have naturals");
-            return "tie";
-
-        } else if(dealerNatural) {
-            System.out.println("The dealer wins with a natural");
-            return "loose";
-        } else if(playerNatural) {
-            System.out.println("The player wins with a natural");
-            return "natural";
-        }
+         String naturalWinner = naturalCheck.checkForWinner(dealerNatural, playerNatural);
+         if (!naturalWinner.equals("none")) return naturalWinner;
 
         playerFlow.playerTurn(playerCards, deck);
         playerValues = cardValues.getCardValues(playerCards);
@@ -76,6 +80,8 @@ public class BlackJackFlow implements IBlackJackFlow{
 
         dealerValues = cardValues.getCardValues(dealerCards);
          int dealerScore = calculateScore.calculate(dealerValues);
+
+         // String result = ComputeWinner.getWinner(dealerScore, playerScore, dealerHandSize)
          if(dealerScore > 21) {
              System.out.println("Dealer busted Player wins!");
             return "win";
