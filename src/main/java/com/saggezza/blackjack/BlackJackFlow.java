@@ -18,11 +18,13 @@ public class BlackJackFlow implements IBlackJackFlow{
     private IDealerFlow dealerFlow;
     private ICalculateScore calculateScore;
     private INaturalCheck naturalCheck;
+    private IComputeWinner computeWinner;
 
     @Autowired
     public BlackJackFlow(IGenerateDeck generateDeck, IDrawCard drawCard, IDisplayFlow displayFlow,
                          ICardValues cardValues, INatural naturalValues, IPlayerFlow playerFlow,
-                         IDealerFlow dealerFlow, ICalculateScore calculateScore, INaturalCheck naturalCheck) {
+                         IDealerFlow dealerFlow, ICalculateScore calculateScore, INaturalCheck naturalCheck,
+                         IComputeWinner computeWinner) {
         this.generateDeck = generateDeck;
         this.drawCard = drawCard;
         this.displayFlow = displayFlow;
@@ -32,6 +34,7 @@ public class BlackJackFlow implements IBlackJackFlow{
         this.dealerFlow = dealerFlow;
         this.calculateScore = calculateScore;
         this.naturalCheck = naturalCheck;
+        this.computeWinner = computeWinner;
     }
 
     // public List<String> playGame(List<Boolean> players) {
@@ -81,26 +84,7 @@ public class BlackJackFlow implements IBlackJackFlow{
         dealerValues = cardValues.getCardValues(dealerCards);
          int dealerScore = calculateScore.calculate(dealerValues);
 
-         // String result = ComputeWinner.getWinner(dealerScore, playerScore, dealerHandSize)
-         if(dealerScore > 21) {
-             System.out.println("Dealer busted Player wins!");
-            return "win";
-
-         } else if (dealerCards.size() == 5) {
-             System.out.println("Dealer drew 5 cards so they win");
-             return "loose";
-
-         } else if (dealerScore > playerScore) {
-             System.out.println("Dealer wins");
-             return"loose";
-
-         } else if (playerScore > dealerScore) {
-             System.out.println("Player wins");
-             return"win";
-
-         } else {
-             System.out.println("Tie");
-             return "tie";
-         }
+          String result = computeWinner.compute(dealerScore, playerScore, dealerCards.size());
+          return result;
     }
 }
