@@ -24,12 +24,13 @@ public class MainFlow implements IMainFlow {
     public void playBets() {
          int numPlayers = playerCountObj.getPlayerCount();
         List<Double> userAmounts = new ArrayList<>();
-        List<Boolean> playing = new ArrayList<>(numPlayers);
+        List<Boolean> playing = new ArrayList<>();
+        List<Double> bets = new ArrayList<>();
         for(int i = 0; i < numPlayers; i++) {
             userAmounts.add(100.0);
             playing.add(true);
+            bets.add(0.0);
         }
-        List<Double> bets = new ArrayList<>(numPlayers);
        boolean playAgain=true;
         Scanner scanner=new Scanner(System.in);
         while(playAgain){
@@ -37,7 +38,7 @@ public class MainFlow implements IMainFlow {
                 if(userAmounts.get(i) > 0) {
                     double bet=betFlow.getUserBet(userAmounts.get(i));
                     bets.set(i, bet);
-             } else {
+                } else {
                     playing.set(i, false);
                 }
             }

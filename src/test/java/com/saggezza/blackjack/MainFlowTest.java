@@ -3,6 +3,7 @@ package com.saggezza.blackjack;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
@@ -15,11 +16,17 @@ import static org.mockito.Mockito.*;
 public class MainFlowTest {
     List<String> playerCards;
     List<String> dealerCards;
+    List<String> results;
+    List<String> loseResults;
 
     @Before
     public void beforeEach() {
         playerCards = new ArrayList<>();
         dealerCards = new ArrayList<>();
+        results = new ArrayList<>();
+        results.add("natural");
+        loseResults = new ArrayList<>();
+        loseResults.add("loose");
     }
 
     @Test
@@ -30,18 +37,18 @@ public class MainFlowTest {
         IBetInputFlow inputobj = mock(IBetInputFlow.class);
         when(inputobj.getUserBet(100.0)).thenReturn(50.0);
         IBlackJackFlow blackjackobj = mock(IBlackJackFlow.class);
-        when(blackjackobj.playGame()).thenReturn("natural");
+        when(blackjackobj.playGame(Mockito.anyList())).thenReturn(results);
         ICalculateBet calculateobj = mock(ICalculateBet.class);
         when(calculateobj.calculate(100.0, 50.0, "natural")).thenReturn(175.0);
 
         IPlayerCountInput playerCountobj = mock(IPlayerCountInput.class);
-        when(playerCountobj.getPlayerCount()).thenReturn(2);
+        when(playerCountobj.getPlayerCount()).thenReturn(1);
 
         //when I start the game
         IMainFlow mainFlowobj = new MainFlow(inputobj, blackjackobj, calculateobj, playerCountobj);
         mainFlowobj.playBets();
         //Then i call betInputFlowOnce
-        verify(inputobj, times(2)).getUserBet(100);
+        verify(inputobj, times(1)).getUserBet(100);
     }
 
     @Test
@@ -52,20 +59,20 @@ public class MainFlowTest {
         when(inputobj.getUserBet(100)).thenReturn(50.0);
 
         IBlackJackFlow blackjackobj = mock(IBlackJackFlow.class);
-        when(blackjackobj.playGame()).thenReturn("natural");
+        when(blackjackobj.playGame(Mockito.anyList())).thenReturn(results);
 
         ICalculateBet calculateobj = mock(ICalculateBet.class);
         when(calculateobj.calculate(100, 50, "natural")).thenReturn(175.0);
 
         IPlayerCountInput playerCountobj = mock(IPlayerCountInput.class);
-        when(playerCountobj.getPlayerCount()).thenReturn(2);
+        when(playerCountobj.getPlayerCount()).thenReturn(1);
 
         //when I start the game
         IMainFlow mainFlowobj = new MainFlow(inputobj, blackjackobj, calculateobj, playerCountobj);
         mainFlowobj.playBets();
 
         //Then I call blackjack once
-        verify(blackjackobj, times(1)).playGame();
+        verify(blackjackobj, times(1)).playGame(Mockito.anyList());
     }
 
     @Test
@@ -76,20 +83,20 @@ public class MainFlowTest {
         when(inputobj.getUserBet(100)).thenReturn(50.0);
 
         IBlackJackFlow blackjackobj = mock(IBlackJackFlow.class);
-        when(blackjackobj.playGame()).thenReturn("natural");
+        when(blackjackobj.playGame(Mockito.anyList())).thenReturn(results);
 
         ICalculateBet calculateobj = mock(ICalculateBet.class);
         when(calculateobj.calculate(100, 50, "natural")).thenReturn(175.0);
 
         IPlayerCountInput playerCountobj = mock(IPlayerCountInput.class);
-        when(playerCountobj.getPlayerCount()).thenReturn(2);
+        when(playerCountobj.getPlayerCount()).thenReturn(1);
 
         //when I start the game
         IMainFlow mainFlowobj = new MainFlow(inputobj, blackjackobj, calculateobj, playerCountobj);
         mainFlowobj.playBets();
 
         //Then I call blackjack once
-        verify(calculateobj, times(2)).calculate(100, 50, "natural");
+        verify(calculateobj, times(1)).calculate(100, 50, "natural");
     }
 
     @Test
@@ -101,7 +108,7 @@ public class MainFlowTest {
         when(inputobj.getUserBet(175.0)).thenReturn(100.0);
 
         IBlackJackFlow blackjackobj = mock(IBlackJackFlow.class);
-        when(blackjackobj.playGame()).thenReturn("natural").thenReturn("loose");
+        when(blackjackobj.playGame(Mockito.anyList())).thenReturn(results).thenReturn(loseResults);
 
         ICalculateBet calculateobj = mock(ICalculateBet.class);
         when(calculateobj.calculate(100, 50, "natural")).thenReturn(175.0);
@@ -110,7 +117,7 @@ public class MainFlowTest {
         ArgumentCaptor<String> argumentCaptor2 = ArgumentCaptor.forClass(String.class);
 
         IPlayerCountInput playerCountobj = mock(IPlayerCountInput.class);
-        when(playerCountobj.getPlayerCount()).thenReturn(2);
+        when(playerCountobj.getPlayerCount()).thenReturn(1);
 
 
         //when I start the game
@@ -132,14 +139,14 @@ public class MainFlowTest {
         when(inputobj.getUserBet(175.0)).thenReturn(100.0);
 
         IBlackJackFlow blackjackobj = mock(IBlackJackFlow.class);
-        when(blackjackobj.playGame()).thenReturn("natural").thenReturn("loose");
+        when(blackjackobj.playGame(Mockito.anyList())).thenReturn(results);
 
         ICalculateBet calculateobj = mock(ICalculateBet.class);
         when(calculateobj.calculate(100, 50, "natural")).thenReturn(175.0);
         when(calculateobj.calculate(175, 100, "loose")).thenReturn(75.0);
 
         IPlayerCountInput playerCountobj = mock(IPlayerCountInput.class);
-        when(playerCountobj.getPlayerCount()).thenReturn(2);
+        when(playerCountobj.getPlayerCount()).thenReturn(1);
 
         //when I start the game
         IMainFlow mainFlowobj = new MainFlow(inputobj, blackjackobj, calculateobj, playerCountobj);

@@ -22,6 +22,7 @@ public class BlackJackFlowTest {
     List<String> dealerCards;
     List<Integer> playerValues;
     List<Integer> dealerValues;
+    List<Boolean> players;
 
     @Before
     public void beforeEach(){
@@ -42,6 +43,8 @@ public class BlackJackFlowTest {
         dealerValues.add(10);
         dealerValues.add(4);
         dealerValues.add(5);
+        players = new ArrayList<>();
+        players.add(true);
     }
 
     @Test
@@ -80,7 +83,7 @@ public class BlackJackFlowTest {
 //      When: I start the game
         IBlackJackFlow blackJackFlow = new BlackJackFlow(generateDeck, drawCard, displayFlow,
                 cardValues, natural, playerFlow, dealerFlow, calculateScore, naturalCheck, computeWinner);
-        blackJackFlow.playGame();
+        blackJackFlow.playGame(players);
 //      Then: I call generate deck once
         verify(generateDeck, times(1)).Generate();
     }
@@ -121,7 +124,7 @@ public class BlackJackFlowTest {
 //      When: I start the game
         IBlackJackFlow blackJackFlow = new BlackJackFlow(generateDeck, drawCard, displayFlow,
                 cardValues, natural, playerFlow, dealerFlow, calculateScore, naturalCheck, computeWinner);
-        blackJackFlow.playGame();
+        blackJackFlow.playGame(players);
         //      Then: I call generate draw card 4 times
         verify(drawCard, times(4)).draw(deck);
     }
@@ -164,7 +167,7 @@ public class BlackJackFlowTest {
 //      When: I start the game
         IBlackJackFlow blackJackFlow = new BlackJackFlow(generateDeck, drawCard, displayFlow,
                 cardValues, natural, playerFlow, dealerFlow, calculateScore, naturalCheck, computeWinner);
-        blackJackFlow.playGame();
+        blackJackFlow.playGame(players);
 
 //      Then: I call display card 4 times
         verify(displayFlow, times(4)).displayCards(argCaptor.capture(),
@@ -207,10 +210,10 @@ public class BlackJackFlowTest {
 //      When: I start the game
         IBlackJackFlow blackJackFlow = new BlackJackFlow(generateDeck, drawCard, displayFlow,
                 cardValues, natural, playerFlow, dealerFlow, calculateScore, naturalCheck, computeWinner);
-        blackJackFlow.playGame();
+        blackJackFlow.playGame(players);
 
 //      Then: I call carvalues card 2 times
-        verify(cardValues, times(4)).getCardValues(argCaptor.capture());
+        verify(cardValues, times(5)).getCardValues(argCaptor.capture());
     }
 
     @Test
@@ -250,7 +253,7 @@ public class BlackJackFlowTest {
 //      When: I start the game
         IBlackJackFlow blackJackFlow = new BlackJackFlow(generateDeck, drawCard, displayFlow,
                 cardValues, natural, playerFlow, dealerFlow, calculateScore, naturalCheck, computeWinner);
-        blackJackFlow.playGame();
+        blackJackFlow.playGame(players);
 
 //      Then: I call carvalues card 2 times
         verify(natural, times(2)).validate(argCaptor.capture(),argCaptor2.capture());
@@ -291,7 +294,7 @@ public class BlackJackFlowTest {
 //      When: I start the game
         IBlackJackFlow blackJackFlow = new BlackJackFlow(generateDeck, drawCard, displayFlow,
                 cardValues, natural, playerFlow, dealerFlow, calculateScore, naturalCheck, computeWinner);
-        blackJackFlow.playGame();
+        blackJackFlow.playGame(players);
 
 //      Then: I call carvalues card 2 times
         verify(playerFlow, times(1)).playerTurn(Mockito.anyList(), Mockito.anyList());
@@ -333,7 +336,7 @@ public class BlackJackFlowTest {
 //      When: I start the game
         IBlackJackFlow blackJackFlow = new BlackJackFlow(generateDeck, drawCard, displayFlow,
                 cardValues, natural, playerFlow, dealerFlow, calculateScore, naturalCheck, computeWinner);
-        blackJackFlow.playGame();
+        blackJackFlow.playGame(players);
 
 //      Then: I call carvalues card 2 times
         verify(dealerFlow, times(1)).dealerDraw(Mockito.anyList(), Mockito.anyList());
@@ -376,10 +379,10 @@ public class BlackJackFlowTest {
 //      When: I start the game
         IBlackJackFlow blackJackFlow = new BlackJackFlow(generateDeck, drawCard, displayFlow,
                 cardValues, natural, playerFlow, dealerFlow, calculateScore, naturalCheck, computeWinner);
-        blackJackFlow.playGame();
+        blackJackFlow.playGame(players);
 
 //      Then: I call carvalues card 2 times
-        verify(calculateScore, times(2)).calculate(argCapture.capture());
+        verify(calculateScore, times(3)).calculate(argCapture.capture());
     }
 
     @Test
@@ -418,7 +421,7 @@ public class BlackJackFlowTest {
 //      When: I start the game
         IBlackJackFlow blackJackFlow = new BlackJackFlow(generateDeck, drawCard, displayFlow,
                 cardValues, natural, playerFlow, dealerFlow, calculateScore, naturalCheck, computeWinner);
-        blackJackFlow.playGame();
+        blackJackFlow.playGame(players);
 
 //      Then: I call carvalues card 2 times
         verify(naturalCheck, times(1)).checkForWinner(false, false);
@@ -455,12 +458,12 @@ public class BlackJackFlowTest {
         IDealerFlow dealerFlow = mock(IDealerFlow.class);
 
         ICalculateScore calculateScore = mock(ICalculateScore.class);
-        when(calculateScore.calculate(Mockito.anyList())).thenReturn(20).thenReturn(19);
+        when(calculateScore.calculate(Mockito.anyList())).thenReturn(20).thenReturn(19).thenReturn(20);
 
 //      When: I start the game
         IBlackJackFlow blackJackFlow = new BlackJackFlow(generateDeck, drawCard, displayFlow,
                 cardValues, natural, playerFlow, dealerFlow, calculateScore, naturalCheck, computeWinner);
-        blackJackFlow.playGame();
+        blackJackFlow.playGame(players);
 
 //      Then: I call compute winner 1 times
         verify(computeWinner, times(1)).compute(19, 20, 2);
