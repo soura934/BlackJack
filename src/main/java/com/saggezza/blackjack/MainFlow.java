@@ -3,27 +3,27 @@ package com.saggezza.blackjack;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Scanner;
 @Component
 public class MainFlow implements IMainFlow {
   private IBetInputFlow betFlow;
   private IBlackJackFlow blackjackobj;
   private ICalculateBet calculateobj;
+  private IPlayerCountInput playerCountObj;
 @Autowired
-    public MainFlow(IBetInputFlow betFlow,IBlackJackFlow blackjackobj,ICalculateBet calculateobj) {
-        this.betFlow=betFlow;
-        this.blackjackobj=blackjackobj;
-        this.calculateobj=calculateobj;
+    public MainFlow(IBetInputFlow betFlow,IBlackJackFlow blackjackobj,ICalculateBet calculateobj, IPlayerCountInput playerCountObj) {
+        this.betFlow= betFlow;
+        this.blackjackobj= blackjackobj;
+        this.calculateobj= calculateobj;
+        this.playerCountObj = playerCountObj;
     }
 
     public void playBets() {
         // PlayingInputFlow that returns # between 1-5
-        // int numPlayers = 3;
+         int numPlayers = playerCountObj.getPlayerCount();
         // List<Double> userAmounts = new ArrayList<>();
         // userAmounts.add(100);
-        // List<Double> bets = new ArrayList<>();
-        // bets.add(0);
+        // List<Double> bets = new ArrayList<>(3);
        double userAmount=100;
        boolean playAgain=true;
         Scanner scanner=new Scanner(System.in);
