@@ -3,5 +3,5 @@ package com.saggezza.blackjack;
 import java.util.List;
 
 public interface IBlackJackFlow {
-    String playGame();
+    List <String> playGame(List<Boolean> players);
 }

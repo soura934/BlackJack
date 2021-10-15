@@ -37,24 +37,22 @@ public class BlackJackFlow implements IBlackJackFlow{
         this.computeWinner = computeWinner;
     }
 
-    // public List<String> playGame(List<Boolean> players) {
-    public String playGame() {
+    public List<String> playGame(List<Boolean> players) {
         List<String> deck = generateDeck.Generate();
-
-//        List<List<String>> playersCards = new ArrayList<>();
-//        for(int i = 0; i < players.size(); i++) {
-//            playersCards.add(new ArrayList<>());
-//        }
-
-        List<String> playerCards = new ArrayList<>();
+        List<List<String>> playersCards = new ArrayList<>();
+        for(int i = 0; i < players.size(); i++) {
+            playersCards.add(new ArrayList<>());
+        }
         List<String> dealerCards = new ArrayList<>();
-
-        // List<String> results = new ArrayList<>();
-
-        dealerCards.add(drawCard.draw(deck));
-        playerCards.add(drawCard.draw(deck));
-        dealerCards.add(drawCard.draw(deck));
-        playerCards.add(drawCard.draw(deck));
+        List<String> results = new ArrayList<>();
+        for(int j = 0; j < 2; j++) {
+            dealerCards.add(drawCard.draw(deck));
+            for(int i = 0; i < playersCards.size(); i++) {
+                List <String> cards = playersCards.get(i);
+                cards.add(drawCard.draw(deck));
+            }
+        }
+        
 
         displayFlow.displayCards("Dealer", dealerCards, true );
         displayFlow.displayCards("Player", playerCards, false );
