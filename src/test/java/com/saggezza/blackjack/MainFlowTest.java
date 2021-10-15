@@ -41,7 +41,7 @@ public class MainFlowTest {
         IMainFlow mainFlowobj = new MainFlow(inputobj, blackjackobj, calculateobj, playerCountobj);
         mainFlowobj.playBets();
         //Then i call betInputFlowOnce
-        verify(inputobj, times(1)).getUserBet(100);
+        verify(inputobj, times(2)).getUserBet(100);
     }
 
     @Test
@@ -69,7 +69,7 @@ public class MainFlowTest {
     }
 
     @Test
-    public void calculateBettest() {
+    public void calculateBetTest() {
         System.setIn(new ByteArrayInputStream("N".getBytes()));
         //Given I am a user
         IBetInputFlow inputobj = mock(IBetInputFlow.class);
@@ -89,7 +89,7 @@ public class MainFlowTest {
         mainFlowobj.playBets();
 
         //Then I call blackjack once
-        verify(calculateobj, times(1)).calculate(100, 50, "natural");
+        verify(calculateobj, times(2)).calculate(100, 50, "natural");
     }
 
     @Test
@@ -148,6 +148,8 @@ public class MainFlowTest {
         //Then I call player once
         verify(playerCountobj, times(1)).getPlayerCount();
     }
+
+
 
 }
 
